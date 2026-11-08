@@ -1,0 +1,46 @@
+{VERSION 6 0 "IBM INTEL NT" "6.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "" 0 1 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 }0 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "Text Ou
+tput" -1 2 1 {CSTYLE "" -1 -1 "Courier" 1 10 0 0 255 1 0 0 0 0 0 1 3 
+0 3 0 }1 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "" 2 6 1 {CSTYLE "" 
+-1 -1 "" 0 1 0 0 0 0 0 0 0 0 0 0 2 0 0 0 }0 0 0 -1 -1 -1 0 0 0 0 0 0 
+-1 0 }}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 1845 "VerifyCutoffAndSca
+lar := proc()\n    local n, leftInteger, rightInteger, nextLeft, nextR
+ight,\n          s, wStar, product, k, term, ratio, psiLower, psiUpper
+,\n          grid, lowerDisplay, upperDisplay;\n\n    n := 60000;\n   \+
+ leftInteger := 300000000*n^5*1237^n;\n    rightInteger := 1240^n;\n  \+
+  if 10^30*leftInteger >= rightInteger then\n        error \"the stric
+t ratio bound for equation (39) fails\";\n    end if;\n    printf(\"Eq
+uation (39) holds and its ratio is < 10^(-30)   PASS\\n\");\n\n    nex
+tLeft := 1237*(n+1)^5;\n    nextRight := 1240*n^5;\n    if nextLeft >=
+ nextRight then\n        error \"the integer comparison for monotonici
+ty fails\";\n    end if;\n    printf(\"1237*60001^5 = %a < %a = 1240*6
+0000^5   PASS\\n\",\n           nextLeft, nextRight);\n\n    s := 1546
+246693/5000000000;\n    wStar := 23203769443/10^10;\n    product := s*
+wStar;\n    if s <= 0 or s >= 1 or wStar <= 1 or wStar >= 3 or product
+ >= 1 then\n        error \"the conditions on s and w_* fail\";\n    e
+nd if;\n    printf(\"s*w_* = %a < 1   PASS\\n\", product);\n\n    # Th
+e term of index k is (-w_*)^k*s^(k*(k-1)/2).\n    # The ratio of succe
+ssive magnitudes is w_* s^k <= w_* s < 1\n    # for k >= 1. The sums t
+hrough 13 and 12 enclose Psi(w_*,s).\n    term, ratio, psiUpper := 1, \+
+wStar, 1;\n    for k from 1 to 12 do\n        term := -ratio*term;\n  \+
+      psiUpper := psiUpper+term;\n        ratio := ratio*s;\n    end d
+o;\n    psiLower := psiUpper-ratio*term;\n\n    grid := 10^18;\n    lo
+werDisplay := floor(grid*psiLower);\n    upperDisplay := ceil(grid*psi
+Upper);\n    if upperDisplay >= 0 then\n        error \"the alternatin
+g-series enclosure does not prove negativity\";\n    end if;\n    prin
+tf(\"Psi(w_*,s) in [%a, %a] * 10^(-18)   PASS\\n\",\n           lowerD
+isplay, upperDisplay);\n    printf(\"The scalar inequalities imply T(s
+) < 3 by the argument in the paper.\\n\");\nend proc:\n\nVerifyCutoffA
+ndScalar():" }}{PARA 6 "" 1 "" {TEXT -1 54 "Equation (39) holds and it
+s ratio is < 10^(-30)   PASS" }}{PARA 6 "" 1 "" {TEXT -1 94 "1237*6000
+1^5 = 961971360271964532371101237 < 964224000000000000000000000 = 1240
+*60000^5   PASS" }}{PARA 6 "" 1 "" {TEXT -1 60 "s*w_* = 35878751766373
+201999/50000000000000000000 < 1   PASS" }}{PARA 6 "" 1 "" {TEXT -1 50 
+"Psi(w_*,s) in [-176228, -176227] * 10^(-18)   PASS" }}{PARA 6 "" 1 "
+" {TEXT -1 68 "The scalar inequalities imply T(s) < 3 by the argument \+
+in the paper." }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}
+{MARK "1 0 0" 0 }{VIEWOPTS 1 1 0 1 1 1803 1 1 1 1 }{PAGENUMBERS 0 1 2 
+33 1 1 }
